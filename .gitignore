@@ -5,3 +5,5 @@ backend/data
 
 .vercel
 .env*
+backend/.env
+frontend/.env
