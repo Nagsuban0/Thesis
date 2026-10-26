@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "https://polyphonic-abroad-boots-brush.trycloudflare.com/api/:path*" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
