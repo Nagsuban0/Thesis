@@ -2,8 +2,7 @@ node_modules
 dist
 backend/data
 *.sqlite*
-
-.vercel
-.env*
 backend/.env
 frontend/.env
+.vercel
+.env*

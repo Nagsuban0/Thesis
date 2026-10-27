@@ -399,7 +399,7 @@ export function RequestDocument() {
               onClick={() => addRow()}
               disabled={rows.length >= MAX_ITEMS || unused.length === 0}
             >
-              + Add another document
+              Add another document
             </button>
 
             {unused.length > 0 && rows.length < MAX_ITEMS && (

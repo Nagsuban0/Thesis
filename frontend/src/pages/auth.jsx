@@ -348,20 +348,45 @@ export function ResetPassword() {
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
 
-  const submit = async (e) => {
-    e.preventDefault();
-    setError('');
-    if (pw.password !== pw.confirm) return setError('Passwords do not match.');
-    setBusy(true);
-    try {
-      await api.post('/auth/reset-password', { token, password: pw.password });
-      navigate('/login', { replace: true, state: { notice: 'Password updated. You can log in now.' } });
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setBusy(false);
-    }
-  };
+
+const submit = async (e) => {
+  e.preventDefault();
+  setError('');
+
+  if (pw.password.length < 8 || pw.password.length > 128) {
+    setError('Password must be 8–128 characters long.');
+    return;
+  }
+
+  if (!/[A-Za-z]/.test(pw.password) || !/[0-9]/.test(pw.password)) {
+    setError('Password must contain a letter and a number.');
+    return;
+  }
+
+  if (pw.password !== pw.confirm) {
+    setError('Passwords do not match.');
+    return;
+  }
+
+  setBusy(true);
+
+  try {
+    await api.post('/auth/reset-password', {
+      token,
+      new_password: pw.password,
+    });
+
+    navigate('/login', {
+      replace: true,
+      state: { notice: 'Password updated. You can log in now.' },
+    });
+  } catch (err) {
+    setError(err.message || 'Unable to reset password. Please try again.');
+  } finally {
+    setBusy(false);
+  }
+};
+
 
   return (
     <AuthShell back="/login" backLabel="Back to log in">

@@ -12,7 +12,7 @@ export const PORT = Number(process.env.PORT || 4000);
 export const CORS_ORIGIN = process.env.CORS_ORIGIN || '';
 
 // Fees are switched off. Prices stay in the database; set FEES_ENABLED=true to show them again.
-export const FEES_ENABLED = bool(process.env.FEES_ENABLED, false);
+export const FEES_ENABLED = bool(process.env.FEES_ENABLED, true); // Set to false to hide fees and total fee on the frontend, but keep the stored prices in the database.
 
 // The public "track my request" search on the front page.
 export const PUBLIC_TRACKING = bool(process.env.PUBLIC_TRACKING, true);
